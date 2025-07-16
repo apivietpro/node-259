@@ -2,10 +2,7 @@ const UserModel = require("../models/user");
 const CategoryModel = require("../models/category");
 const ProductModel = require("../models/product");
 exports.Test = async (req, res) => {
-  const products = await ProductModel.find({}).populate({
-    path: "category_id",
-  });
-  console.log(products);
+  console.log(req.query);
 
   // const user = {
   //   email: "vietpro.edu.vn@gmail.con",
