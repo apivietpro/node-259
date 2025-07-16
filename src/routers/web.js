@@ -5,10 +5,11 @@ const AuthController = require("../apps/controllers/auth");
 const AdminController = require("../apps/controllers/admin");
 const ProductController = require("../apps/controllers/product");
 
-// router.get("/test", TestController.Test);
+router.get("/test", TestController.Test);
 // router.get("/form", TestController.Form);
 // router.post("/form", TestController.Test);
-router.get("/admin/login", AuthController.login);
+router.get("/admin/login", AuthController.getLogin);
+router.post("/admin/login", AuthController.postLogin);
 router.get("/admin/logout", AuthController.logout);
 router.get("/admin/dashboard", AdminController.dashboard);
 router.get("/admin/products", ProductController.index);
