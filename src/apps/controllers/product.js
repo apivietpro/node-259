@@ -1,6 +1,7 @@
 const ProductModel = require("../models/product");
 const paginate = require("../../common/paginate");
 exports.index = async (req, res) => {
+  //
   const page = Number(req.query.page) || 1;
   const limit = 10;
   const skip = page * limit - limit;
@@ -23,11 +24,14 @@ exports.index = async (req, res) => {
   });
 };
 exports.create = (req, res) => {
+  //
   return res.render("admin/products/add_product");
 };
 exports.edit = (req, res) => {
+  //
   return res.render("admin/products/edit_product");
 };
 exports.del = (req, res) => {
+  //
   return res.send("Delete product");
 };
