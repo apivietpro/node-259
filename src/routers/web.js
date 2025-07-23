@@ -6,6 +6,7 @@ const AdminController = require("../apps/controllers/admin");
 const ProductController = require("../apps/controllers/product");
 const TestMiddleware = require("../apps/middlewares/test");
 const AuthMiddleware = require("../apps/middlewares/auth");
+const UploadMiddleware = require("../apps/middlewares/upload");
 
 router.get("/test1", TestController.test1);
 router.get("/test2", TestMiddleware.test, TestController.test2);
@@ -32,6 +33,12 @@ router.get(
   "/admin/products/create",
   AuthMiddleware.checkAdmin,
   ProductController.create
+);
+router.post(
+  "/admin/products/store",
+  AuthMiddleware.checkAdmin,
+  UploadMiddleware.single("thumbnail"),
+  ProductController.store
 );
 router.get(
   "/admin/products/edit/:id",

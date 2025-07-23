@@ -4,4 +4,5 @@ module.exports = {
   viewsFolder: `${__dirname}/../src/apps/views/`,
   viewEngine: "ejs",
   staticFolder: `${__dirname}/../src/public`,
+  tmpUpload: `${__dirname}/../src/tmp`,
 };
