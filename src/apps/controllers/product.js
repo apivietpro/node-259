@@ -55,11 +55,39 @@ exports.store = async (req, res) => {
     return res.redirect("/admin/products");
   }
 };
-exports.edit = (req, res) => {
-  //
-  return res.render("admin/products/edit_product");
+exports.edit = async (req, res) => {
+  const { id } = req.params;
+  const categories = await CategoryModel.find().sort({ _id: 1 });
+  const product = await ProductModel.findById(id);
+  return res.render("admin/products/edit_product", { product, categories });
 };
-exports.del = (req, res) => {
-  //
-  return res.send("Delete product");
+exports.update = async (req, res) => {
+  const { id } = req.params;
+  const { body, file } = req;
+  const product = {
+    name: body.name,
+    slug: slug(body.name),
+    price: body.price,
+    warranty: body.warranty,
+    accessories: body.accessories,
+    promotion: body.promotion,
+    status: body.status,
+    cat_id: body.cat_id,
+    is_stock: body.is_stock,
+    featured: body.featured === "on" || false,
+    description: body.description,
+  };
+  if (file) {
+    const originalname = file.originalname;
+    const thumbnail = `products/${originalname}`;
+    fs.renameSync(file.path, `${__dirname}/../../public/upload/${thumbnail}`);
+    product.thumbnail = thumbnail;
+  }
+  await ProductModel.updateOne({ _id: id }, { $set: product });
+  return res.redirect("/admin/products");
+};
+exports.del = async (req, res) => {
+  const { id } = req.params;
+  await ProductModel.deleteOne({ _id: id });
+  return res.redirect("/admin/products");
 };

@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    is_featured: {
+    featured: {
       type: Boolean,
       default: false,
     },

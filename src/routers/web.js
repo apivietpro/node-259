@@ -45,6 +45,12 @@ router.get(
   AuthMiddleware.checkAdmin,
   ProductController.edit
 );
+router.post(
+  "/admin/products/update/:id",
+  AuthMiddleware.checkAdmin,
+  UploadMiddleware.single("thumbnail"),
+  ProductController.update
+);
 router.get(
   "/admin/products/delete/:id",
   AuthMiddleware.checkAdmin,
